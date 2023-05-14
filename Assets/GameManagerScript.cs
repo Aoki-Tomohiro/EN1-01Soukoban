@@ -8,6 +8,7 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject boxPrefab;
+    public GameObject clearText;
     //配列の宣言
     int[,] map; //レベルデザイン用の配列
     GameObject[,] field; //ゲーム管理用の配列
@@ -173,6 +174,13 @@ public class GameManagerScript : MonoBehaviour
 
             //移動処理を関数化
             MoveNumber("Player", new Vector2Int(playerIndex.x, playerIndex.y), new Vector2Int(playerIndex.x + 1, playerIndex.y));
+
+            //もしクリアしていたら
+            if (IsCleard())
+            {
+                //ゲームオブジェクトのSetActiveメソッドを使い有効化
+                clearText.SetActive(true);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -181,6 +189,13 @@ public class GameManagerScript : MonoBehaviour
 
             //移動処理を関数化
             MoveNumber("Player", new Vector2Int(playerIndex.x, playerIndex.y), new Vector2Int(playerIndex.x - 1, playerIndex.y));
+
+            //もしクリアしていたら
+            if (IsCleard())
+            {
+                //ゲームオブジェクトのSetActiveメソッドを使い有効化
+                clearText.SetActive(true);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -189,6 +204,13 @@ public class GameManagerScript : MonoBehaviour
 
             //移動処理を関数化
             MoveNumber("Player", new Vector2Int(playerIndex.x, playerIndex.y), new Vector2Int(playerIndex.x, playerIndex.y - 1));
+
+            //もしクリアしていたら
+            if (IsCleard())
+            {
+                //ゲームオブジェクトのSetActiveメソッドを使い有効化
+                clearText.SetActive(true);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -197,11 +219,13 @@ public class GameManagerScript : MonoBehaviour
 
             //移動処理を関数化
             MoveNumber("Player", new Vector2Int(playerIndex.x, playerIndex.y), new Vector2Int(playerIndex.x, playerIndex.y + 1));
-        }
 
-        if(IsCleard())
-        {
-            Debug.Log("GameClear");
+            //もしクリアしていたら
+            if (IsCleard())
+            {
+                //ゲームオブジェクトのSetActiveメソッドを使い有効化
+                clearText.SetActive(true);
+            }
         }
     }
 }
