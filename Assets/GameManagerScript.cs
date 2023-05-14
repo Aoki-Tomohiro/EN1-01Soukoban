@@ -80,13 +80,47 @@ public class GameManagerScript : MonoBehaviour
         return true;
     }
 
+    bool IsCleard()
+    {
+        //Vector2IntŒ^‚Ì‰Â•Ï’·”z—ñ‚Ìì¬
+        List<Vector2Int> goals = new List<Vector2Int>();
+
+        for(int y = 0; y < map.GetLength(0); y++)
+        {
+            for(int x = 0; x < map.GetLength(1); x++)
+            {
+                //Ši”[êŠ‚©”Û‚©‚ğ”»’f
+                if (map[y,x] == 3)
+                {
+                    //Ši”[êŠ‚ÌƒCƒ“ƒfƒbƒNƒX‚ğT‚¦‚Ä‚¨‚­
+                    goals.Add(new Vector2Int(x, y));
+                }
+            }
+        }
+
+        for(int i = 0; i < goals.Count; i++)
+        {
+            GameObject f = field[goals[i].y, goals[i].x];
+            if(f == null || f.tag != "Box")
+            {
+                //ˆê‚Â‚Å‚à” ‚ª‚È‚©‚Á‚½‚çğŒ–¢’B¬
+                return false;
+            }
+        }
+
+        //ğŒ–¢’B¬‚Å‚È‚¯‚ê‚ÎğŒ’B¬
+        return true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         map = new int[,]
         {
             { 0, 0, 0, 0, 0 },
-            { 0, 2, 1, 0, 0 },
+            { 0, 3, 1, 3, 0 },
+            { 0, 0, 2, 0, 0 },
+            { 0, 2, 3, 2, 0 },
             { 0, 0, 0, 0, 0 },
         };
 
@@ -163,6 +197,11 @@ public class GameManagerScript : MonoBehaviour
 
             //ˆÚ“®ˆ—‚ğŠÖ”‰»
             MoveNumber("Player", new Vector2Int(playerIndex.x, playerIndex.y), new Vector2Int(playerIndex.x, playerIndex.y + 1));
+        }
+
+        if(IsCleard())
+        {
+            Debug.Log("GameClear");
         }
     }
 }
