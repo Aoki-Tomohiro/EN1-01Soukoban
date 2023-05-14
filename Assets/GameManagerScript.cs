@@ -9,6 +9,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject boxPrefab;
     public GameObject clearText;
+    public GameObject goalPrefab;
     //配列の宣言
     int[,] map; //レベルデザイン用の配列
     GameObject[,] field; //ゲーム管理用の配列
@@ -148,6 +149,14 @@ public class GameManagerScript : MonoBehaviour
                     field[y, x] = Instantiate(
                         boxPrefab,
                         new Vector3(x, map.GetLength(0) - y, 0),
+                        Quaternion.identity);
+                }
+
+                if (map[y, x] == 3)
+                {
+                    field[y, x] = Instantiate(
+                        goalPrefab,
+                        new Vector3(x, map.GetLength(0) - y, 0.01f),
                         Quaternion.identity);
                 }
             }
